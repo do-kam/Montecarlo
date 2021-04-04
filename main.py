@@ -2,12 +2,13 @@
 #to compare results: online calc:https://academo.org/demos/estimating-pi-monte-carlo/
 import random as rd
 import numpy as np
-
+import matplotlib.pyplot as plt
+import math
 #n = input('Enter the size of random saples: ')
 #print("Sample size is "+n)
 #n = int(n)
-n=100
-m=10
+n=10000000
+#m=10
 pii=[]
 
 zwischenergebnis= np.zeros(n)
@@ -28,7 +29,7 @@ def mc_pi(n):
         #global zwischenergebnis
         zwischenergebnis[i]=pi
        # mc_pi(zwischenergebnis)
-        print("Zwischenergebnis ",zwischenergebnis[i])
+        #print("Zwischenergebnis ",zwischenergebnis[i])
     print("Final Estimation of Pi=", pi)
     return[pi]
 
@@ -54,8 +55,8 @@ def mc_pi_stat(n,m):
     x=0
     while x<m:
         pii.append(mc_pi(n))
-        print("pii array")
-        print(pii)
+        #print("pii array")
+        #print(pii)
         x = x + 1
     mean=np.mean(pii)
     std=np.std(pii,ddof=1)
@@ -65,11 +66,30 @@ def mc_pi_stat(n,m):
     print(std)
     return mean, std
 
+#irgendwie springs aus der for schleife nach dem x=2. mal raus :(
+#weil n zu klein war und der zero array somit nur 100 stellen hatte (x= 2 =100)
+def mc_pi_plt():
+    a=10
+    daten= np.zeros((6,3))
+    for x in range(6):
+        [mean,std]=mc_pi_stat(a,10)
+        daten[x,0]=a
+        daten[x,1]=mean
+        daten[x,2]=std
+        a = a * 10
+    #plt.plot([xachse],[mean[n]])
+    #plt.plot(a)
+    #plt.yscale("log")
+    #plt.ylabel('some numbers')
+    #plt.show()
+    print(daten)
 
 
 
 
-#mc_pi(n)
-#mc_pi_stat(n,m)
-[mean, std] = mc_pi_stat(100, 10) #m-mal Berechnung ausführen
-#print("Mittelwert ist:",mittelwert)
+
+#[mean, std] = mc_pi_stat(10, 10) #m-mal Berechnung ausführen
+#[mean, std] = mc_pi_stat(100, 10) #m-mal Berechnung ausführen
+#[mean, std] = mc_pi_stat(1000, 10) #m-mal Berechnung ausführen
+mc_pi_plt()
+
