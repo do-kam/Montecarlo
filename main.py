@@ -3,17 +3,13 @@
 import random as rd
 import numpy as np
 import matplotlib.pyplot as plt
-import math
-#n = input('Enter the size of random saples: ')
-#print("Sample size is "+n)
-#n = int(n)
+
 n=10000000
-#m=10
 pii=[]
 
 zwischenergebnis= np.zeros(n)
 
-def mc_pi(n):
+def mc_pi(n): #calculates pi by creating n random points, returns pi
     circlepoints = 0
     squarepoints = 0
     for i in range (0,n):
@@ -34,24 +30,7 @@ def mc_pi(n):
     return[pi]
 
 
-#def mc_pi_stat(zwischenerg):
-    #global mittelwert
-    #mittelwert=np.mean(zwischenerg)
-    #print(mittelwert)
-
-
-#def mc_pi_stat(n,m):
-#    mc_pi(n)
-#    x=0
-#    while x<m:
-#        pii.append(mc_pi(n))
-#        x=x+1
-#        mean =np.mean(pii)
-#        std = np.std(pii,ddof=1)
-#        return mean,std
-
-
-def mc_pi_stat(n,m):
+def mc_pi_stat(n,m): #appends m times of pi calculations, returns mean and std
     x=0
     while x<m:
         pii.append(mc_pi(n))
@@ -66,17 +45,11 @@ def mc_pi_stat(n,m):
     print(std)
     return mean, std
 
-#irgendwie springs aus der for schleife nach dem x=2. mal raus :(
-#weil n zu klein war und der zero array somit nur 100 stellen hatte (x= 2 =100)
 def mc_pi_plt():
     a=100
-    daten= np.zeros((5,3))
+    daten= np.zeros((5,3)) #creates 3D array column0: x-axis, column1: mean, column2: std
     for x in range(5):
-       # xachse = [0,0,0,0,0]
-        #xachse[x]=a
         [mean,std]=mc_pi_stat(a,10)
-        #daten[x,1]=mean
-        #daten[x,2]=std
         daten[x,0]=a
         daten[x,1]=mean
         daten[x,2]=std
@@ -93,10 +66,6 @@ def mc_pi_plt():
 
 
 
-
-
-#[mean, std] = mc_pi_stat(10, 10) #m-mal Berechnung ausführen
 #[mean, std] = mc_pi_stat(100, 10) #m-mal Berechnung ausführen
-#[mean, std] = mc_pi_stat(1000, 10) #m-mal Berechnung ausführen
 mc_pi_plt()
 
