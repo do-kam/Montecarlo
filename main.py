@@ -69,20 +69,27 @@ def mc_pi_stat(n,m):
 #irgendwie springs aus der for schleife nach dem x=2. mal raus :(
 #weil n zu klein war und der zero array somit nur 100 stellen hatte (x= 2 =100)
 def mc_pi_plt():
-    a=10
-    daten= np.zeros((6,3))
-    for x in range(6):
+    a=100
+    daten= np.zeros((5,3))
+    for x in range(5):
+       # xachse = [0,0,0,0,0]
+        #xachse[x]=a
         [mean,std]=mc_pi_stat(a,10)
+        #daten[x,1]=mean
+        #daten[x,2]=std
         daten[x,0]=a
         daten[x,1]=mean
         daten[x,2]=std
         a = a * 10
-    #plt.plot([xachse],[mean[n]])
-    #plt.plot(a)
-    #plt.yscale("log")
-    #plt.ylabel('some numbers')
-    #plt.show()
+
     print(daten)
+    plt.scatter(np.log10(daten[:,0]), daten[:, 1], color='red')
+    plt.errorbar(np.log10(daten[:,0]), daten[:, 1], yerr=daten[:, 2])
+    plt.title('Real values and errorbars')
+    plt.show()
+
+    plt.scatter(np.log10(daten[:,0]), np.log10(daten[:, 2]))
+    plt.show()
 
 
 
