@@ -61,8 +61,14 @@ def mc_pi_plt():
     plt.title('Real values and errorbars')
     plt.show()
 
-    plt.scatter(np.log10(daten[:,0]), np.log10(daten[:, 2]))
+    plt.scatter(np.log10(daten[:,0]), np.log10(daten[:, 2]),color = 'yellow')
+    #plt.show()
+    xax=np.log10(daten[:,0])
+    yax= np.log10(daten[:, 2])
+    m,b = np.polyfit(xax,yax,1)
+    plt.plot(xax,m*xax +b)
     plt.show()
+
 
 
 
